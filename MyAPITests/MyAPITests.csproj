@@ -14,8 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Collections\" />
     <Folder Include="Alrogithms\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyAPI\MyAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MyAPI">
+      <HintPath>..\MyAPI\bin\Debug\netstandard2.0\MyAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
