@@ -26,7 +26,7 @@ namespace MyAPITests.Collections
 
 
         [TestMethod]
-        public void AddLast()
+        public void AddLast() 
         {
             List<int> test = new List<int>();
             test.AddLast(1);
@@ -40,7 +40,6 @@ namespace MyAPITests.Collections
                 Assert.AreEqual(i, cur);
                 cur++;
             }
-
         }
 
         [TestMethod]

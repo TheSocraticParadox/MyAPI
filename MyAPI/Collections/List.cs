@@ -27,6 +27,9 @@ namespace MyAPI.Collections
             }
         }
 
+        /// <summary>
+        /// Creates a new doubly linked list
+        /// </summary>
         public List()
         {
             this.head = null;

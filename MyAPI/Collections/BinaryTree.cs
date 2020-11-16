@@ -11,16 +11,25 @@ namespace MyAPI.Collections
         private int count;
         private BinaryTreeNode<T> Root;
 
+        /// <summary>
+        /// The number of elements in the tree
+        /// </summary>
         public int Size
         {
             get { return count; }
         }
 
+        /// <summary>
+        /// Adds an item to the binary search tree
+        /// </summary>
         public void Add(T data)
         {
             this.Root = Add(data, this.Root);
         }
 
+        /// <summary>
+        /// Internal add function that allows a starting point to specify 
+        /// </summary>
         private BinaryTreeNode<T> Add(T data, BinaryTreeNode<T> curRoot)
         {
             if (curRoot == null)
@@ -49,17 +58,23 @@ namespace MyAPI.Collections
             }
         }
 
+        /// <summary>
+        /// Removes an item from the tree
+        /// </summary>
         public T Remove(T data)
         {
             return Remove(data, this.Root);
         }
 
+        /// <summary>
+        /// Removes an item from the BST
+        /// </summary>
         private T Remove(T data, BinaryTreeNode<T> start)
         {
             BinaryTreeNode<T> rem = Find(start, data);
             if (rem == null)
                 throw new IndexOutOfRangeException("Cannot remove node because it was not present in the tree");
-            if (rem.Left == null && rem.Right == null)
+            if (rem.Left == null && rem.Right == null)//if it's a leaf
             {
                 if (rem.Parent == null)
                     this.Root = null;
@@ -72,21 +87,21 @@ namespace MyAPI.Collections
                     rem.Parent.Right = null;
                 }
             }
-            else if (rem.Left != null)
+            else if (rem.Left != null)//only left child exists
             {
                 if (rem.Parent.Left == rem)
                     rem.Parent.Left = rem.Left;
                 else
                     rem.Parent.Right = rem.Left;
             }
-            else if (rem.Right != null)
+            else if (rem.Right != null)//only right child exists
             {
                 if (rem.Parent.Left == rem)
                     rem.Parent.Left = rem.Right;
                 else
                     rem.Parent.Right = rem.Right;
             }
-            else
+            else//both left and right children exist
             {
                 BinaryTreeNode<T> sucessor = GetSucessor(rem);
                 T oldData = rem.Data;
@@ -94,14 +109,15 @@ namespace MyAPI.Collections
                 Remove(sucessor.Data, rem.Right);
                 return oldData;
             }
-
-
             rem.Left = null;
             rem.Right = null;
             rem.Parent = null;
             return rem.Data;
         }
 
+        /// <summary>
+        /// Gets the successor of the provided node
+        /// </summary>
         private BinaryTreeNode<T> GetSucessor(BinaryTreeNode<T> n)
         { 
             BinaryTreeNode<T> ret = n.Right;
@@ -110,7 +126,9 @@ namespace MyAPI.Collections
             return ret;
         }
 
-
+        /// <summary>
+        /// Converts the binary tree to an array for easy readability
+        /// </summary>
         public T[] AsArray()
         {
             T[] ret = new T[(int)Math.Pow(2, this.Size)];
@@ -118,6 +136,10 @@ namespace MyAPI.Collections
             return ret ;
         }
 
+
+        /// <summary>
+        /// Adds a node to the array and recursively adds the left and right subtrees
+        /// </summary>
         private void BuildArray(BinaryTreeNode<T> cur, int curIdx, T[] arr)
         {
             if (cur == null)
@@ -126,13 +148,18 @@ namespace MyAPI.Collections
             BuildArray(cur.Left, 2 * curIdx, arr);
             BuildArray(cur.Right, 2 * curIdx + 1, arr);
         }
-
-
+    
+        /// <summary>
+        /// Checks if a specific element exists in the tree
+        /// </summary>
         public bool Contains(T data)
         {
             return Find(this.Root, data) != null;
         }
 
+        /// <summary>
+        /// Helper function that finds a specific node in the three and returns the BinaryTreeNode
+        /// </summary>
         private BinaryTreeNode<T> Find(BinaryTreeNode<T> cur, T data)
         {
             if (cur == null)
@@ -144,6 +171,9 @@ namespace MyAPI.Collections
     }
 
 
+    /// <summary>
+    /// Helper class to represent a node in the binary tree
+    /// </summary>
     public class BinaryTreeNode<T> where T:IComparable
     {
         public BinaryTreeNode(T data)
