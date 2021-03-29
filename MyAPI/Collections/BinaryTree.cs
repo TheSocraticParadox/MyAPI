@@ -6,6 +6,10 @@ using System.Text;
 
 namespace MyAPI.Collections
 {
+    /// <summary>
+    /// A unbalanced Binary Tree implementation 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BinaryTree<T> where T:IComparable
     {
         private int count;
