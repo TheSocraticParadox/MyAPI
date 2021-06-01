@@ -39,6 +39,7 @@ namespace MyAPITests.Collections
             tree.Add(10);
             tree.Add(13);
 
+
             Assert.IsTrue(tree.Contains(2));
             Assert.IsFalse(tree.Contains(3));
             Assert.IsTrue(tree.Contains(2));
@@ -76,12 +77,6 @@ namespace MyAPITests.Collections
             Assert.IsTrue(tree.Contains(8));
             tree.Remove(8);
             Assert.IsFalse(tree.Contains(8));
-
-        }
-
-        [TestMethod]
-        public void ToArray()
-        {
 
         }
 
